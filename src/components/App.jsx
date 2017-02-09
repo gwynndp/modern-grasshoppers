@@ -347,6 +347,7 @@ class App extends React.Component {
           <ul role='nav'>
             <li><Link to='signin'>Sign In</Link></li>
             <li><Link to='signup'>Sign Up</Link></li>
+            <li><Link to='account'>Account</Link></li>
           </ul>
         </nav>
         {this.props.children && React.cloneElement(this.props.children, {

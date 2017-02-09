@@ -166,4 +166,26 @@ app.get('/tasks', checkCredentials, function(req, res) {
     });
 });
 
+/* FOR TESTING */
+
+app.get('/users', function(req, res) {
+  User.find({}) //req.user._id comes from the cookie
+    .then(function(user) {
+      res.send(user);
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
+});
+
+app.get('/user', function(req, res) {
+   User.findOne({ _id: req.user._id }) //req.user._id comes from the cookie
+    .then(function(user) {
+      res.send(user);
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
+});
+
 module.exports = app;
