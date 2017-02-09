@@ -8,7 +8,7 @@ var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'CONNECTION ERROR:')) // Test database connection
 
-db.once('open', function() {
+db.once('open', function() { 
 	console.log("CONNECTION SUCCEEDED");
 });
 

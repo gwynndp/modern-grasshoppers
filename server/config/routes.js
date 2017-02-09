@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require('express'); // Require block
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var db = require('./config.js');
@@ -12,9 +12,9 @@ var cookieParser = require('cookie-parser');
 var passport = require('passport'); //http://passportjs.org/docs/overview
 var LocalStrategy = require('passport-local').Strategy; //https://github.com/jaredhanson/passport-local
 
-var app = express();
+var app = express(); // Instantiate app
 
-//authentication
+// Authentication block
 app.use(cookieParser());
 app.use(require('express-session')({
   secret: 'keyboard cat',
