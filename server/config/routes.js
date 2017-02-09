@@ -6,7 +6,6 @@ var User = require('../database.js');
 var moment = require('moment'); //momentjs is a library for working with dates and times
 var stripe = require("stripe")("sk_test_Q5lTBRirLvXbx84BdkyXyyfZ");
 
-
 //authentication middleware
 var cookieParser = require('cookie-parser');
 var passport = require('passport'); //http://passportjs.org/docs/overview

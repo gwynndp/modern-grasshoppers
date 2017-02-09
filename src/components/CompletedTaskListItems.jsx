@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-var CompletedTaskListItems = (props) => {
+var CompletedTaskListItems = (props) => { // React component for complete list of task items
   return (
     <div className="task list entry">
       <div className="list-body">

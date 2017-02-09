@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // Import block
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import {Link, hashHistory} from 'react-router';
@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor (props) {
     super(props);
 
-    this.state = {
+    this.state = { // Properties of the current state of the app
       _id: null,
       tasks: [],
       activeTask: '',
