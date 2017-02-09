@@ -9,9 +9,9 @@ class Timer extends React.Component {
     super(props);
 
     this.state = {
-      baseDate = new Date(),
-      curDate = new Date(),
-      differenceSeconds = 0
+      baseDate: new Date(),
+      curDate: new Date(),
+      differenceSeconds: 0
     }
 /*
     this.state = {
@@ -39,8 +39,8 @@ class Timer extends React.Component {
 */
   refresh() {
     this.setState({
-      this.state.curDate = new Date();
-      this.state.differenceSeconds = (curDate.getTime() - baseDate.getTime())/1000;
+      curDate: new Date(),
+      differenceSeconds: (curDate.getTime() - baseDate.getTime())/1000
     })
   }
   /////////////////
