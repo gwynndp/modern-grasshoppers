@@ -4,6 +4,8 @@ var bodyParser = require('body-parser');
 var db = require('./config.js');
 var User = require('../database.js');
 var moment = require('moment'); //momentjs is a library for working with dates and times
+var stripe = require("stripe")("sk_test_Q5lTBRirLvXbx84BdkyXyyfZ");
+
 
 //authentication middleware
 var cookieParser = require('cookie-parser');
@@ -15,9 +17,9 @@ var app = express();
 //authentication
 app.use(cookieParser());
 app.use(require('express-session')({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -25,6 +27,10 @@ app.use(passport.session());
 //static assets
 app.use(express.static(__dirname + '/../../public/'));
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
 app.use(bodyParser.json());
 
 //authentication middleware
@@ -32,7 +38,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 
 //http://passportjs.org/docs/configure
 //gives the user a cookie that contains the user's id so the session is user-specific
-passport.serializeUser(User.serializeUser(function(user, done){
+passport.serializeUser(User.serializeUser(function(user, done) {
   done(null, user.id);
 }));
 passport.deserializeUser(User.deserializeUser(function(id, done) {
@@ -43,7 +49,7 @@ passport.deserializeUser(User.deserializeUser(function(id, done) {
 
 //only allows http requests to tasks to go through if a user is authenticated
 var checkCredentials = function(req, res, next) {
-  if(req.isAuthenticated()) {
+  if (req.isAuthenticated()) {
     return next();
   } else {
     res.redirect('#/signin'); //not needed for CheckLoggedIn
@@ -54,15 +60,33 @@ app.get('/', checkCredentials, function(req, res) {
   res.send(user);
 });
 
+app.post('/payment', function(req, res) {
+
+  console.log('PAYMENT POSTED', req.body.token);
+
+  var token = req.body.token;
+
+  var charge = stripe.charges.create({
+    amount: 1000,
+    currency: "usd",
+    description: "Example charge",
+    source: token,
+  }, function(err, charge) {
+    console.log('error', err, charge);
+  });
+
+  res.send(charge);
+});
+
 //add a new user
 //http://mherman.org/blog/2015/01/31/local-authentication-with-passport-and-express-4/
 app.post('/signup', function(req, res) {
   //User.register is passport local mongoose method. It checks to see if a username already exists, and only signs the new user up if it does not.
-  User.register(new User({ username: req.body.username}), req.body.password, function(err, user) {
-    if(err) {
+  User.register(new User({ username: req.body.username }), req.body.password, function(err, user) {
+    if (err) {
       console.error(err);
     }
-    passport.authenticate('local')(req, res, function () {
+    passport.authenticate('local')(req, res, function() {
       //204 is the only code that yields a "success" for the ajax request
       res.status(204).send('You are signed up');
     });
@@ -81,15 +105,14 @@ app.post('/signout', function(req, res) {
 
 //add a new task for a user
 app.post('/tasks', checkCredentials, function(req, res) {
-  User.findOne(
-    {_id: req.user._id}, //this comes from the cookie
+  User.findOne({ _id: req.user._id }, //this comes from the cookie
     //push a new task into the tasks array
     function(err, user) {
-      if(!err) {
-        if(!user) {
-            console.log("User doesn't exist, please sign up.");
+      if (!err) {
+        if (!user) {
+          console.log("User doesn't exist, please sign up.");
         } else {
-          if(user.tasks.id(req.body._id)) {
+          if (user.tasks.id(req.body._id)) {
             var taskToUpdate = user.tasks.id(req.body._id);
             //console.log('FOUND TASK to update', taskToUpdate);
             taskToUpdate.task = req.body.task;
@@ -116,10 +139,9 @@ app.post('/tasks', checkCredentials, function(req, res) {
             });
           }
           user.save(function(err) {
-            if(!err) {
+            if (!err) {
               console.log("user task added", req.body.task);
-            }
-            else {
+            } else {
               console.log("Error: could not save user.task " + req.body.task);
             }
           });
@@ -135,7 +157,7 @@ app.post('/tasks', checkCredentials, function(req, res) {
 
 //get all tasks for a user
 app.get('/tasks', checkCredentials, function(req, res) {
-  User.findOne({_id: req.user._id}) //req.user._id comes from the cookie
+  User.findOne({ _id: req.user._id }) //req.user._id comes from the cookie
     .then(function(user) {
       res.send(user.tasks);
     })
@@ -145,4 +167,3 @@ app.get('/tasks', checkCredentials, function(req, res) {
 });
 
 module.exports = app;
-

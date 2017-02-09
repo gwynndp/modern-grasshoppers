@@ -1,8 +1,6 @@
 import React from 'react';
 
 var TasksLayout = (props) => (
-
-    <div>
       <div className='container content'>
         <div>
           <UserSignout
@@ -31,7 +29,7 @@ var TasksLayout = (props) => (
           />
         </div>
       </div>
-    </div>
+
 )
 
 export default TasksLayout;
