@@ -345,9 +345,10 @@ class App extends React.Component {
       <div id='main'>
         <nav>
           <ul role='nav'>
-            <li><Link to='signin'>Sign In</Link></li>
-            <li><Link to='signup'>Sign Up</Link></li>
-            <li><Link to='account'>Account</Link></li>
+            {console.log('Logged In?', this.state.isLoggedIn)}
+            {this.state.isLoggedIn ? null : <li><Link to='signin'>Sign In</Link></li>}
+            {this.state.isLoggedIn ? null : <li><Link to='signup'>Sign Up</Link></li>}
+            {this.state.isLoggedIn ? <li><Link to='account'>Account</Link></li> : null}
           </ul>
         </nav>
         {this.props.children && React.cloneElement(this.props.children, {
