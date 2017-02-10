@@ -1,15 +1,12 @@
-.signup {
-  width: 50%;
-  margin: 0 auto;
+body: {
+  height: 100%;
 }
 
-.signin {
-  width: 50%;
-  margin: 0 auto;
+form {
+    width: 100% !important;
 }
 
 #contractlyLeft {
-  height: 1500px;
   width: 250px;
 }
 

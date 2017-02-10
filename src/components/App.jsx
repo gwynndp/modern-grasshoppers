@@ -356,14 +356,15 @@ class App extends React.Component {
           </div>
        </nav>
       <div className="row">
+      {this.state.isLoggedIn ?
         <div id="contractlyLeft" className="col s3 grey">
           <ul>
             <li>
             {this.state.isLoggedIn ? <Link className="btn waves-effect waves-light" to='account'>Customer Invoice</Link> : null}</li>
             <li>{this.state.isLoggedIn ?<Link className="btn waves-effect waves-light" to='Tasks'>Contractor Tasks</Link> : null}</li>
           </ul>
-        </div>
-        <div className="col s9">
+        </div>:null}
+        <div className="col s9 content">
         {this.props.children && React.cloneElement(this.props.children, {
           postDataToServer:   this.postDataToServer.bind(this),
           onStartButtonClick: this.onStartButtonClick.bind(this),
