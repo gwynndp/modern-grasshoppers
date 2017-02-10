@@ -42,6 +42,7 @@ class App extends React.Component {
     this.onPauseButtonClick = this.onPauseButtonClick.bind(this);
     this.onStartButtonClick = this.onStartButtonClick.bind(this);
     this.onStopButtonClick = this.onStopButtonClick.bind(this);
+    this.onDeleteButtonClick = this.onDeleteButtonClick.bind(this);
   }
 
   //Ajax get request needs to be wrapped in a function
@@ -370,6 +371,7 @@ class App extends React.Component {
           onStartButtonClick: this.onStartButtonClick.bind(this),
           onPauseButtonClick: this.onPauseButtonClick.bind(this),
           onStopButtonClick:  this.onStopButtonClick.bind(this),
+          onDeleteButtonClick: this.onDeleteButtonClick.bind(this),
           handleChange:       this.handleChange.bind(this),
           handleSubmit:       this.handleSubmit.bind(this),
           handleUsernameChange: this.handleUsernameChange.bind(this),
