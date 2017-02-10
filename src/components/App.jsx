@@ -2,6 +2,8 @@ import React from 'react'; // Import block
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import {Link, hashHistory} from 'react-router';
+import UserSignout from './UserSignout.jsx';
+
 
 class App extends React.Component {
   constructor (props) {
@@ -343,14 +345,25 @@ class App extends React.Component {
   render() {
     return(
       <div id='main'>
-        <nav>
-          <ul role='nav'>
-            {console.log('Logged In?', this.state.isLoggedIn)}
-            {this.state.isLoggedIn ? null : <li><Link to='signin'>Sign In</Link></li>}
-            {this.state.isLoggedIn ? null : <li><Link to='signup'>Sign Up</Link></li>}
-            {this.state.isLoggedIn ? <li><Link to='account'>Account</Link></li> : null}
+        <nav className="blue">
+          <div className="nav-wrapper">
+          <a href="#" className="brand-logo center">Contractly</a>
+          <ul id="nav-mobile" className="left">
+            <li>{this.state.isLoggedIn ? null : <Link to='signin'>Sign In</Link>}</li>
+            <li>{this.state.isLoggedIn ? null : <Link to='signup'>Sign Up</Link>} </li>
+            <li>{this.state.isLoggedIn ?<Link to='signout'>Sign Out</Link> : null}</li>
+            </ul>
+          </div>
+       </nav>
+      <div className="row">
+        <div id="contractlyLeft" className="col s3 grey">
+          <ul>
+            <li>
+            {this.state.isLoggedIn ? <Link className="btn waves-effect waves-light" to='account'>Customer Invoice</Link> : null}</li>
+            <li>{this.state.isLoggedIn ?<Link className="btn waves-effect waves-light" to='Tasks'>Contractor Tasks</Link> : null}</li>
           </ul>
-        </nav>
+        </div>
+        <div className="col s9">
         {this.props.children && React.cloneElement(this.props.children, {
           postDataToServer:   this.postDataToServer.bind(this),
           onStartButtonClick: this.onStartButtonClick.bind(this),
@@ -385,6 +398,8 @@ class App extends React.Component {
           formatTime:         this.formatTime,
           tick:               this.tick
         })}
+        </div>
+        </div>
       </div>
     );
   }

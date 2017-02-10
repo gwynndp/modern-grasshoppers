@@ -1,117 +1,27 @@
-@import url("http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
-
-* {
- font-family: 'Waiting for the Sunrise', sans-serif;
-}
-
-body {
-  background: #f1f1f1;
-  padding: 30px;
-  font-size: 1.3em;
-}
-
-h1 {
-  font-size: 2.5em;
-  color: black;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-}
-
-h2, h3, h4 {
-  color: black;
-  text-align: left;
-}
-
-h4.username {
-  display: inline-block;
-  margin: 0px 20px;
-  float: left;
-}
-
-span {
-  font-family: "HelveticaNeue-Light";
-  font-size: .7em;
-  margin: 4px 10px 20px;
-  color: #777;
-  /* display: inline-block;
+.signup {
   width: 50%;
-  vertical-align: text-top; */
-  line-height: 1.5;
-}
-
-ul {
-  list-style: none;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-}
-
-ul li {
-  display: inline-block;
-  margin: 15px;
-  font-size: 1em;
-}
-
-button, input {
-  font-family: "HelveticaNeue-Light";
-  font-size: small;
-  color: #333;
-  background: #ffffff;
-  border: .001px solid #444;
-  /* border: none; */
-  padding: 10px;
-  border-radius: 6px;
-  margin: 10px 20px;
-}
-
-#app {
-  width: 60%;
   margin: 0 auto;
 }
 
-.signout.input {
-  float: right;
+.signin {
+  width: 50%;
+  margin: 0 auto;
 }
 
-input[type="text"], input[type="password"] {
-    width: 90%;
-    float: left;
-    margin: 10px 20px;
+#contractlyLeft {
+  height: 1500px;
+  width: 250px;
 }
 
-.container {
-  clear: both;
+.btn {
+    margin: 5px;
 }
 
-.container.tasks {
-  border: 1px dashed;
-  margin: 20px;
-  border-radius: 10px;
-  padding: 20px;
+.current-task {
+  padding: 10px;
 }
 
-.list-body {
-  background: #fff;
-  padding: 20px;
-  border: 0;
-  box-shadow: 0 1px 2px rgba(0,0,0,.1);
-  margin-top: 10px;
-  overflow: auto;
-}
-
-.list-body button.btn {
-    margin: 10px;
-}
-
-.task-list {
-
-}
-
-.timer.btn {
-  float: right;
-}
-
-.task-entry-time {
-    float: right;
+.completedTasks {
+  padding: 10px;
+  border: 1px solid;
 }

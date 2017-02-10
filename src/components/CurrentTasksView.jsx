@@ -5,7 +5,7 @@ var CurrentTasksView = (props) => {
     <div className="task list entry">
     <h4>Current Tasks:</h4>
     {props.tasks.map((task) =>
-      <div className="list-body">
+      <div className="list-body card">
         <CurrentTasks
           key={task._id}
           task={task.task}

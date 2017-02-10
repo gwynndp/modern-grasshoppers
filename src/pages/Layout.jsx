@@ -1,13 +1,7 @@
 import React from 'react';
 
-var TasksLayout = (props) => ( 
+var TasksLayout = (props) => (
       <div className='container content'>
-        <div>
-          <UserSignout
-            signout={props.signout}
-          />
-        </div>
-
         <div className='container form'>
           <TaskEntry
             handleChange={props.handleChange}
