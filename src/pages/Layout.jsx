@@ -27,6 +27,7 @@ var TasksLayout = (props) => (
         <div className='container tasks'>
           <CompletedTaskList
             tasks={props.tasks}
+            onDeleteButtonClick={props.onDeleteButtonClick}
           />
         </div>
       </div>

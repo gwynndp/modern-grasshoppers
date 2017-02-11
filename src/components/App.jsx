@@ -37,7 +37,6 @@ class App extends React.Component {
     }
     // Init for the setInterval/timer increment function.
     this.incrementer = null;
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.onPauseButtonClick = this.onPauseButtonClick.bind(this);
@@ -309,6 +308,14 @@ class App extends React.Component {
     });
   };
 
+  onDeleteButtonClick(item, e) {
+    e.preventDefault();
+    this.setState({ // Properties of the current state of the app
+      tasks: item.tasks
+      //started may be useful for changing state of the START button, etc
+    });
+  }
+
   /* BELOW FUNCTIONS RELATE TO TIMER FEATURE */
 
   onPauseButtonClick(item, e) {
@@ -363,7 +370,7 @@ class App extends React.Component {
           <ul>
             <li>
             {this.state.isLoggedIn ? <Link className="btn waves-effect waves-light" to='account'>Customer Invoice</Link> : null}</li>
-            <li>{this.state.isLoggedIn ?<Link className="btn waves-effect waves-light" to='Tasks'>Contractor Tasks</Link> : null}</li>
+            <li>{this.state.isLoggedIn ?<Link className="btn waves-effect waves-light" to='tasks'>Contractor Tasks</Link> : null}</li>
           </ul>
         </div>:null}
         <div className="col s9 content">

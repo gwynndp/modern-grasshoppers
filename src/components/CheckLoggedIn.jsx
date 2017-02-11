@@ -21,6 +21,7 @@ class CheckLoggedIn extends React.Component {
         onStartButtonClick: this.props.onStartButtonClick,
         onPauseButtonClick: this.props.onPauseButtonClick,
         onStopButtonClick:  this.props.onStopButtonClick,
+        onDeleteButtonClick: this.props.onDeleteButtonClick,
         handleChange:       this.props.handleChange,
         handleSubmit:       this.props.handleSubmit,
         handleUsernameChange: this.props.handleUsernameChange,
