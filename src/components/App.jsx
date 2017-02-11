@@ -13,6 +13,7 @@ class App extends React.Component {
       _id: null,
       tasks: [],
       activeTask: '',
+      activeProject: {},
       currentTask: true,
       currentTaskArray: [],
       start_time: Date,
@@ -28,7 +29,7 @@ class App extends React.Component {
       usernameInSignup: '',
       passwordInSignup: '',
       currentUser: '',
-      project: '',
+      project: {},
       projectArray: [],
       incorrectLogin: false,
       usernameTaken: false,
@@ -36,12 +37,12 @@ class App extends React.Component {
     }
     // Init for the setInterval/timer increment function.
     this.incrementer = null;
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.onPauseButtonClick = this.onPauseButtonClick.bind(this);
     this.onStartButtonClick = this.onStartButtonClick.bind(this);
     this.onStopButtonClick = this.onStopButtonClick.bind(this);
+    this.onDeleteButtonClick = this.onDeleteButtonClick.bind(this);
   }
 
   //Ajax get request needs to be wrapped in a function
@@ -196,7 +197,7 @@ class App extends React.Component {
           usernameInSignup: '',
           passwordInSignup: '',
           currentUser: '',
-          project: '',
+          project: {},
           projectArray: [],
           isLoggedIn: false
         })
@@ -253,8 +254,8 @@ class App extends React.Component {
       _id: item._id,
       activeTask: item.task,
       currentTask: true,
-      project: projectName,
-      projectArray: this.state.projectArray.concat(projectName),
+      project: {name: projectName},
+      projectArray: this.state.projectArray.push({name:projectName}),
       start_time: Date.now(),
       total_time: item.total_time,
       started: true,  //so we can prevent another task from being created
@@ -299,13 +300,21 @@ class App extends React.Component {
         _id: null,
         activeTask: '',
         currentTask: true,
-        project: '',
+        project: {},
         start_time: Date,
         total_time: 0,
         started: false,  //so we can prevent another task from being created
       });
     });
   };
+
+  onDeleteButtonClick(item, e) {
+    e.preventDefault();
+    this.setState({ // Properties of the current state of the app
+      tasks: item.tasks
+      //started may be useful for changing state of the START button, etc
+    });
+  }
 
   /* BELOW FUNCTIONS RELATE TO TIMER FEATURE */
 
@@ -361,7 +370,7 @@ class App extends React.Component {
           <ul>
             <li>
             {this.state.isLoggedIn ? <Link className="btn waves-effect waves-light" to='account'>Customer Invoice</Link> : null}</li>
-            <li>{this.state.isLoggedIn ?<Link className="btn waves-effect waves-light" to='Tasks'>Contractor Tasks</Link> : null}</li>
+            <li>{this.state.isLoggedIn ?<Link className="btn waves-effect waves-light" to='tasks'>Contractor Tasks</Link> : null}</li>
           </ul>
         </div>:null}
         <div className="col s9 content">
@@ -370,6 +379,7 @@ class App extends React.Component {
           onStartButtonClick: this.onStartButtonClick.bind(this),
           onPauseButtonClick: this.onPauseButtonClick.bind(this),
           onStopButtonClick:  this.onStopButtonClick.bind(this),
+          onDeleteButtonClick: this.onDeleteButtonClick.bind(this),
           handleChange:       this.handleChange.bind(this),
           handleSubmit:       this.handleSubmit.bind(this),
           handleUsernameChange: this.handleUsernameChange.bind(this),

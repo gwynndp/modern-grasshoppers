@@ -9,9 +9,9 @@ var TasksLayout = (props) => (
           />
         </div>
 
-        <div>
+        <div className='container projects'>
           <ProjectMenu
-            projectArray={props.projectArray}
+            projectArray = {props.projectArray}
           />
         </div>
 
@@ -33,10 +33,9 @@ var TasksLayout = (props) => (
         <div className='container tasks'>
           <CompletedTaskList
             tasks={props.tasks}
+            onDeleteButtonClick={props.onDeleteButtonClick}
           />
         </div>
       </div>
-
 )
-
 export default TasksLayout;
