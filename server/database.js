@@ -16,8 +16,6 @@ var userSchema = mongoose.Schema({
     total_time: Number, //minutes
     project: String,
     currentTask: Boolean
-    //estimated_time:
-    //due_date: Date
   }]
 })
 

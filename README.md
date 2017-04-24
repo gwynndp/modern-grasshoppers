@@ -45,3 +45,9 @@ View the project roadmap [here](https://github.com/Modern-Grasshoppers/modern-gr
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+## Etc
+
+How to run this app and more info for legacy teams [here](https://docs.google.com/document/d/1W2F78j8rpUn2mOgopa8g8emLDbBIS3OxcJm8kKxVsPA/edit?usp=sharing)
+
+Link to diagrams and whiteboard for this project [here](https://realtimeboard.com/app/board/o9J_k03o2EA=/)

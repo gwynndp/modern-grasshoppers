@@ -2,10 +2,10 @@ import React from 'react';
 
 var StopButton = (props) => {
   return (
-    <div className="stop timer btn">
-      <button className = "btn btn-default" onClick = {(e) => {
+    <div className="stop timer">
+      <button className="btn waves-effect waves-light right" onClick = {(e) => {
         props.onStopButtonClick(e)
-      }}> STOP </button>
+      }}> STOP</button>
     </div>
   );
 }

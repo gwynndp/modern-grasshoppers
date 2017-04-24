@@ -1,9 +1,15 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose');  // Require block
 
-//var databasepath = 'mongodb://localhost/whathaveidone';
-var databasepath = 'mongodb://heroku_d9pnl43h:udkupbgk2v8cepa7h3i9d8394f@ds119578.mlab.com:19578/heroku_d9pnl43h';
-mongoose.connect(databasepath);
+var databasepath = 'mongodb://localhost/whathaveidone'; // Local host
+
+mongoose.connect(databasepath); // Set up connection
 
 var db = mongoose.connection;
 
-module.exports = db;
+db.on('error', console.error.bind(console, 'CONNECTION ERROR:')) // Test database connection
+
+db.once('open', function() {  // Establish connection
+	console.log("CONNECTION SUCCEEDED");
+});
+
+module.exports = db; // Export database

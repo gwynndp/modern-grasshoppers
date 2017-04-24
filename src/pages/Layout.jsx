@@ -1,12 +1,17 @@
 import React from 'react';
 
 var TasksLayout = (props) => (
-
-    <div>
       <div className='container content'>
+
         <div>
           <UserSignout
             signout={props.signout}
+          />
+        </div>
+
+        <div className='container projects'>
+          <ProjectMenu
+            projectArray = {props.projectArray}
           />
         </div>
 
@@ -17,7 +22,6 @@ var TasksLayout = (props) => (
           />
         </div>
 
-        { /*TODO: Change className?*/ }
         <div className="container tasks">
           <CurrentTasksView
             tasks={props.currentTaskArray}
@@ -29,10 +33,9 @@ var TasksLayout = (props) => (
         <div className='container tasks'>
           <CompletedTaskList
             tasks={props.tasks}
+            onDeleteButtonClick={props.onDeleteButtonClick}
           />
         </div>
       </div>
-    </div>
 )
-//window.Layout = Layout;
 export default TasksLayout;

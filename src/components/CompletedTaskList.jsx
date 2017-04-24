@@ -5,26 +5,25 @@ var CompletedTaskList = (props) => {
     <div className="task list">
     <h4>Completed Tasks:</h4>
     {props.tasks.map((task) =>
-      <CompletedTaskListItems
-        task={task.task}
-        time={task.total_time}
-        project = {task.project}
-        start_time = {task.start_time}
-        end_time = {task.end_time}
-        key={task._id}
-      />
+      <div>
+        <CompletedTaskListItems
+          task={task.task}
+          time={task.total_time}
+          project = {task.project}
+          start_time = {task.start_time}
+          end_time = {task.end_time}
+          key={task._id}
+          onDeleteButtonClick = {props.onDeleteButtonClick}
+        />
+      </div>
     )}
     </div>
   );
 }
 
-// PropTypes tell other developers what `props` a component expects
-// Warnings will be shown in the console when the defined rules are violated
-
 CompletedTaskList.propTypes = {
   tasks: React.PropTypes.array
 };
 
-// In the ES6 spec, files are "modules" and do not share a top-level scope.
-// `var` declarations will only exist globally where explicitly defined.
+
 window.CompletedTaskList = CompletedTaskList;
