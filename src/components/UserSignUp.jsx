@@ -7,7 +7,7 @@ var UserSignUp = (props) => {
       <form onSubmit={props.postToSignup}>
         <input type='text' id='username' placeholder = 'username' name='usernameInSignup' onChange={props.handleUsernameChange} required/>
         <input type='password' id='userpw' placeholder = 'password' name='passwordInSignup' onChange={props.handleUsernameChange} required/>
-        <button>Create Account</button>
+        <button className="btn">Create Account</button>
         <IncorrectLogin displayMessage={props.usernameTaken} message={'Username is taken'}/>
       </form>
     </div>

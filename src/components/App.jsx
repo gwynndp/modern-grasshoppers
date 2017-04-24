@@ -1,16 +1,19 @@
-import React from 'react';
+import React from 'react'; // Import block
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import {Link, hashHistory} from 'react-router';
+import UserSignout from './UserSignout.jsx';
+
 
 class App extends React.Component {
   constructor (props) {
     super(props);
 
-    this.state = {
+    this.state = { // Properties of the current state of the app
       _id: null,
       tasks: [],
       activeTask: '',
+      activeProject: {},
       currentTask: true,
       currentTaskArray: [],
       start_time: Date,
@@ -26,7 +29,7 @@ class App extends React.Component {
       usernameInSignup: '',
       passwordInSignup: '',
       currentUser: '',
-      project: '',
+      project: {},
       projectArray: [],
       incorrectLogin: false,
       usernameTaken: false,
@@ -34,12 +37,12 @@ class App extends React.Component {
     }
     // Init for the setInterval/timer increment function.
     this.incrementer = null;
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.onPauseButtonClick = this.onPauseButtonClick.bind(this);
     this.onStartButtonClick = this.onStartButtonClick.bind(this);
     this.onStopButtonClick = this.onStopButtonClick.bind(this);
+    this.onDeleteButtonClick = this.onDeleteButtonClick.bind(this);
   }
 
   //Ajax get request needs to be wrapped in a function
@@ -194,7 +197,7 @@ class App extends React.Component {
           usernameInSignup: '',
           passwordInSignup: '',
           currentUser: '',
-          project: '',
+          project: {},
           projectArray: [],
           isLoggedIn: false
         })
@@ -251,8 +254,8 @@ class App extends React.Component {
       _id: item._id,
       activeTask: item.task,
       currentTask: true,
-      project: projectName,
-      projectArray: this.state.projectArray.concat(projectName),
+      project: {name: projectName},
+      projectArray: this.state.projectArray.push({name:projectName}),
       start_time: Date.now(),
       total_time: item.total_time,
       started: true,  //so we can prevent another task from being created
@@ -297,13 +300,21 @@ class App extends React.Component {
         _id: null,
         activeTask: '',
         currentTask: true,
-        project: '',
+        project: {},
         start_time: Date,
         total_time: 0,
         started: false,  //so we can prevent another task from being created
       });
     });
   };
+
+  onDeleteButtonClick(item, e) {
+    e.preventDefault();
+    this.setState({ // Properties of the current state of the app
+      tasks: item.tasks
+      //started may be useful for changing state of the START button, etc
+    });
+  }
 
   /* BELOW FUNCTIONS RELATE TO TIMER FEATURE */
 
@@ -343,17 +354,32 @@ class App extends React.Component {
   render() {
     return(
       <div id='main'>
-        <nav>
-          <ul role='nav'>
-            <li><Link to='signin'>Sign In</Link></li>
-            <li><Link to='signup'>Sign Up</Link></li>
+        <nav className="blue">
+          <div className="nav-wrapper">
+          <a href="#" className="brand-logo center">Contractly</a>
+          <ul id="nav-mobile" className="left">
+            <li>{this.state.isLoggedIn ? null : <Link to='signin'>Sign In</Link>}</li>
+            <li>{this.state.isLoggedIn ? null : <Link to='signup'>Sign Up</Link>} </li>
+            <li>{this.state.isLoggedIn ?<Link to='signout'>Sign Out</Link> : null}</li>
+            </ul>
+          </div>
+       </nav>
+      <div className="row">
+      {this.state.isLoggedIn ?
+        <div id="contractlyLeft" className="col s3 grey">
+          <ul>
+            <li>
+            {this.state.isLoggedIn ? <Link className="btn waves-effect waves-light" to='account'>Customer Invoice</Link> : null}</li>
+            <li>{this.state.isLoggedIn ?<Link className="btn waves-effect waves-light" to='tasks'>Contractor Tasks</Link> : null}</li>
           </ul>
-        </nav>
+        </div>:null}
+        <div className="col s9 content">
         {this.props.children && React.cloneElement(this.props.children, {
           postDataToServer:   this.postDataToServer.bind(this),
           onStartButtonClick: this.onStartButtonClick.bind(this),
           onPauseButtonClick: this.onPauseButtonClick.bind(this),
           onStopButtonClick:  this.onStopButtonClick.bind(this),
+          onDeleteButtonClick: this.onDeleteButtonClick.bind(this),
           handleChange:       this.handleChange.bind(this),
           handleSubmit:       this.handleSubmit.bind(this),
           handleUsernameChange: this.handleUsernameChange.bind(this),
@@ -383,6 +409,8 @@ class App extends React.Component {
           formatTime:         this.formatTime,
           tick:               this.tick
         })}
+        </div>
+        </div>
       </div>
     );
   }

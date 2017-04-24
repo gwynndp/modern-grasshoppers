@@ -2,8 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import $ from 'jquery';
-import CheckLoggedIn from './components/CheckLoggedIn.jsx'
-import Layout from './pages/Layout.jsx'
+import CheckLoggedIn from './components/CheckLoggedIn.jsx';
+import Layout from './pages/Layout.jsx';
+import Account from './components/Account.jsx';
+import Signout from './components/UserSignout.jsx';
+
 
 var app = document.getElementById('app');
 
@@ -14,6 +17,8 @@ var routes = (
       <Route path="signup" component={UserSignUp} />
       <Route component={CheckLoggedIn}>
         <Route path="tasks" component={Layout} />
+        <Route path="account" component={Account} />
+        <Route path="signout" component={Signout} />
       </Route>
       <Route path='*' component={NotFound} />
     </Route>
